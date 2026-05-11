@@ -1,0 +1,4 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+rgw_sameclass,7,0.6412343312647069,1.8571428571428572,2
+jobda_cleanroom,7,0.6386555576078622,2.0,3
+dgw_sameclass,7,0.6446853371092731,2.142857142857143,2

@@ -1,0 +1,2 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+raw_aug_magnitude_warping,1,0.16666666666666666,1.0,1

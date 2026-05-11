@@ -1,0 +1,3 @@
+method,status,n_rows
+manifold_mixup,success,60
+raw_mixup,success,60

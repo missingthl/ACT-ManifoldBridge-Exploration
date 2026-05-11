@@ -1,0 +1,5 @@
+method,status,n_rows
+dba_sameclass,success,60
+pca_cov_state,success,60
+random_cov_state,success,60
+raw_aug_jitter,success,60

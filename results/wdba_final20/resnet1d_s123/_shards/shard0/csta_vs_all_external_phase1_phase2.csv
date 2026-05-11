@@ -1,0 +1,7 @@
+dataset,wdba_sameclass,csta_top1_minus_wdba_sameclass,csta_group_minus_wdba_sameclass,csta_group_minus_csta_top1
+articularywordrecognition,0.9708562304040566,,,
+cricket,0.0747549019607843,,,
+epilepsy,0.9586103624081828,,,
+handmovementdirection,0.36940528831465413,,,
+japanesevowels,0.9748549646117772,,,
+pendigits,0.9840855520562091,,,

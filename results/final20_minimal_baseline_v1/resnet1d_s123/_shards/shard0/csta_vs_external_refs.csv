@@ -1,0 +1,6 @@
+dataset,no_aug,best_rawaug,raw_mixup,dba_sameclass,raw_smote_flatten_balanced,random_cov_state,pca_cov_state,csta_top1_current,csta_group_template_top,csta_top1_minus_no_aug,csta_group_minus_no_aug,csta_top1_minus_best_rawaug,csta_group_minus_best_rawaug,csta_top1_minus_raw_mixup,csta_group_minus_raw_mixup,csta_top1_minus_dba_sameclass,csta_group_minus_dba_sameclass,csta_top1_minus_raw_smote_flatten_balanced,csta_group_minus_raw_smote_flatten_balanced,csta_top1_minus_random_cov_state,csta_group_minus_random_cov_state,csta_top1_minus_pca_cov_state,csta_group_minus_pca_cov_state,csta_group_minus_csta_top1
+articularywordrecognition,,0.965116332298941,,0.972049183666575,,0.9654175087392479,0.9687439634975866,,,,,,,,,,,,,,,,,
+epilepsy,,0.9467455737543231,,0.9787495091972703,,0.9706258106585528,0.9667815852593377,,,,,,,,,,,,,,,,,
+handmovementdirection,,0.265734184400544,,0.35262496501639,,0.2903481591789633,0.2976569238271552,,,,,,,,,,,,,,,,,
+japanesevowels,,0.9808285891033094,,0.9800850697535949,,0.9839705286795409,0.9701810617784153,,,,,,,,,,,,,,,,,
+pendigits,,0.9883795179267159,,0.9848062271156607,,0.9877961433402455,0.9878735541580331,,,,,,,,,,,,,,,,,

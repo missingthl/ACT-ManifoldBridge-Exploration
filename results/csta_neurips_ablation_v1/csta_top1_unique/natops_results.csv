@@ -1,0 +1,4 @@
+dataset,seed,status,fail_reason,requested_k_dir,effective_k_dir,algo,model,pipeline
+natops,1,failed,multi-template pools require an even --multiplier for +/- template slots.,10,0,zpia_top1_pool,resnet1d,act
+natops,2,failed,multi-template pools require an even --multiplier for +/- template slots.,10,0,zpia_top1_pool,resnet1d,act
+natops,3,failed,multi-template pools require an even --multiplier for +/- template slots.,10,0,zpia_top1_pool,resnet1d,act

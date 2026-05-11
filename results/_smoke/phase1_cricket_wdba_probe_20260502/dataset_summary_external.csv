@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+cricket,wdba_sameclass,0.07475490196078431,,0.014368428530832623,,0.08253968253968254,86.0,1.0,1

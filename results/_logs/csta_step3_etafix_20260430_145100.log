@@ -1,0 +1,13 @@
+Running CSTA Step 3 Diagnostic Sweep (Gamma/Eta)...
+Target Sampling: csta_topk_uniform_top5
+Output root: standalone_projects/ACT_ManifoldBridge/results/csta_step3_diagnostic_sweep_etafix/resnet1d_s123
+Backbone: resnet1d
+Datasets: atrialfibrillation,ering,handmovementdirection,handwriting,japanesevowels,natops,racketsports
+Seeds: 1,2,3
+Gammas: 0.05 0.1 0.2
+Eta-safe values: 0.25 0.5 0.75
+GPUs: 0 1 2 3 (max concurrent jobs: 4)
+>>> Launching Gamma=0.05, Eta_Safe=0.25 on GPU=0
+>>> Launching Gamma=0.05, Eta_Safe=0.5 on GPU=1
+>>> Launching Gamma=0.05, Eta_Safe=0.75 on GPU=2
+>>> Launching Gamma=0.1, Eta_Safe=0.25 on GPU=3

@@ -1,0 +1,6 @@
+dataset,wdba_sameclass,csta_top1_minus_wdba_sameclass,csta_group_minus_wdba_sameclass,csta_group_minus_csta_top1
+cricket,0.7581992150006857,,,
+fingermovements,0.5697561712437285,,,
+heartbeat,0.6762975616035242,,,
+natops,0.9471451759840152,,,
+uwavegesturelibrary,0.7407423894473163,,,

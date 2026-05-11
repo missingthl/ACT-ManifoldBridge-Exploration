@@ -1,0 +1,2 @@
+[natops s1] fitting no_aug baseline
+[natops s1] method=csta_topk_uniform_top5

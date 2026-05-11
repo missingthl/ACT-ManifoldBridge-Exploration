@@ -1,0 +1,7 @@
+dataset,best_phase2_baseline,best_phase2_overall_mean_f1,best_phase2_f1,csta_top1_current,csta_group_template_top,best_phase2_minus_csta_top1,best_phase2_minus_csta_group
+articularywordrecognition,wdba_sameclass,0.803012005959089,0.9708562304040566,,,,
+cricket,wdba_sameclass,0.803012005959089,0.0747549019607843,,,,
+epilepsy,wdba_sameclass,0.803012005959089,0.9586103624081828,,,,
+handmovementdirection,wdba_sameclass,0.803012005959089,0.36940528831465413,,,,
+japanesevowels,wdba_sameclass,0.803012005959089,0.9748549646117772,,,,
+pendigits,wdba_sameclass,0.803012005959089,0.9840855520562091,,,,

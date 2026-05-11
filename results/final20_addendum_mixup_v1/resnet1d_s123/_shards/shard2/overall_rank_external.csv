@@ -1,0 +1,3 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+raw_mixup,5,0.6300651197715605,1.5,2
+manifold_mixup,5,0.6234992937661796,1.5,2

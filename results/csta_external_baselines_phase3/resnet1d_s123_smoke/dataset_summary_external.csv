@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+natops,manifold_mixup,0.19061421737132053,,-0.016636332864973846,,0.17777777777777778,0.0,0.0,1

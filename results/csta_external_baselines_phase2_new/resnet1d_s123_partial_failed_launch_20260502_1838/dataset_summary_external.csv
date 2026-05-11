@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+atrialfibrillation,jobda_cleanroom,0.20346320346320346,,-0.012987012987012991,,0.2222222222222222,36.0,3.0,1

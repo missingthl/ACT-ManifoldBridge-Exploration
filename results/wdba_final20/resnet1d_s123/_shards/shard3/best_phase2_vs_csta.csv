@@ -1,0 +1,6 @@
+dataset,best_phase2_baseline,best_phase2_overall_mean_f1,best_phase2_f1,csta_top1_current,csta_group_template_top,best_phase2_minus_csta_top1,best_phase2_minus_csta_group
+cricket,wdba_sameclass,0.7396637971774059,0.7581992150006857,,,,
+fingermovements,wdba_sameclass,0.7396637971774059,0.5697561712437285,,,,
+heartbeat,wdba_sameclass,0.7396637971774059,0.6762975616035242,,,,
+natops,wdba_sameclass,0.7396637971774059,0.9471451759840152,,,,
+uwavegesturelibrary,wdba_sameclass,0.7396637971774059,0.7407423894473163,,,,

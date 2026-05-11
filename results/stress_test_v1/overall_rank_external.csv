@@ -1,0 +1,4 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_topk_uniform_top5,3,0.46713465186844827,1.0,3
+csta_top1_current,3,0.4120930280568227,2.3333333333333335,0
+csta_template_random_within_bank,3,0.4017928770842369,2.6666666666666665,0

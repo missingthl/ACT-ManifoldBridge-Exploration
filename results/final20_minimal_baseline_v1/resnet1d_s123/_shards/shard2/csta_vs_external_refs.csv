@@ -1,0 +1,6 @@
+dataset,no_aug,best_rawaug,raw_mixup,dba_sameclass,raw_smote_flatten_balanced,random_cov_state,pca_cov_state,csta_top1_current,csta_group_template_top,csta_top1_minus_no_aug,csta_group_minus_no_aug,csta_top1_minus_best_rawaug,csta_group_minus_best_rawaug,csta_top1_minus_raw_mixup,csta_group_minus_raw_mixup,csta_top1_minus_dba_sameclass,csta_group_minus_dba_sameclass,csta_top1_minus_raw_smote_flatten_balanced,csta_group_minus_raw_smote_flatten_balanced,csta_top1_minus_random_cov_state,csta_group_minus_random_cov_state,csta_top1_minus_pca_cov_state,csta_group_minus_pca_cov_state,csta_group_minus_csta_top1
+basicmotions,,1.0,,1.0,,1.0,1.0,,,,,,,,,,,,,,,,,
+ethanolconcentration,,0.2377446865817983,,0.258612198795816,,0.2706648530087039,0.2456723023182481,,,,,,,,,,,,,,,,,
+har,,0.9574282914597271,,0.9390384503315355,,0.9504481152861262,0.952658934909662,,,,,,,,,,,,,,,,,
+motorimagery,,0.38407768180355245,,0.4794005162451454,,0.46327033447294647,0.4844047439880412,,,,,,,,,,,,,,,,,
+selfregulationscp2,,0.48226173590281474,,0.46848522621714844,,0.48993781636211636,0.5128788972306962,,,,,,,,,,,,,,,,,

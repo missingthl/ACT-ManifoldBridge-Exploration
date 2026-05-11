@@ -1,0 +1,2 @@
+dataset,seed,status,fail_reason,requested_k_dir,effective_k_dir,algo,model,pipeline
+finger_movements,-1,failed,Unsupported dataset: finger_movements,10,0,zpia_top1_pool,resnet1d,act

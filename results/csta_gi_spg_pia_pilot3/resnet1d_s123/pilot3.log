@@ -1,0 +1,85 @@
+nohup: 忽略输入
+/home/THL/miniconda3/envs/pia/lib/python3.10/site-packages/tslearn/bases/bases.py:16: UserWarning: h5py not installed, hdf5 features will not be supported.
+Install h5py to use hdf5 features: http://docs.h5py.org/
+  warn(h5py_msg)
+[natops s1] fitting no_aug baseline
+[natops s1] method=csta_topk_uniform_top5
+[natops s1] method=random_cov_state
+[natops s1] method=csta_template_random_within_bank
+[natops s1] method=spg_pia_zhead
+[natops s1] method=gi_spg_pia_zhead
+[natops s1] method=task_guided_latent_residual_flow
+[natops s1] method=wdba_sameclass
+[natops s1] method=dba_sameclass
+[natops s2] fitting no_aug baseline
+[natops s2] method=csta_topk_uniform_top5
+[natops s2] method=random_cov_state
+[natops s2] method=csta_template_random_within_bank
+[natops s2] method=spg_pia_zhead
+[natops s2] method=gi_spg_pia_zhead
+[natops s2] method=task_guided_latent_residual_flow
+[natops s2] method=wdba_sameclass
+[natops s2] method=dba_sameclass
+[natops s3] fitting no_aug baseline
+[natops s3] method=csta_topk_uniform_top5
+[natops s3] method=random_cov_state
+[natops s3] method=csta_template_random_within_bank
+[natops s3] method=spg_pia_zhead
+[natops s3] method=gi_spg_pia_zhead
+[natops s3] method=task_guided_latent_residual_flow
+[natops s3] method=wdba_sameclass
+[natops s3] method=dba_sameclass
+[japanesevowels s1] fitting no_aug baseline
+[japanesevowels s1] method=csta_topk_uniform_top5
+[japanesevowels s1] method=random_cov_state
+[japanesevowels s1] method=csta_template_random_within_bank
+[japanesevowels s1] method=spg_pia_zhead
+[japanesevowels s1] method=gi_spg_pia_zhead
+[japanesevowels s1] method=task_guided_latent_residual_flow
+[japanesevowels s1] method=wdba_sameclass
+[japanesevowels s1] method=dba_sameclass
+[japanesevowels s2] fitting no_aug baseline
+[japanesevowels s2] method=csta_topk_uniform_top5
+[japanesevowels s2] method=random_cov_state
+[japanesevowels s2] method=csta_template_random_within_bank
+[japanesevowels s2] method=spg_pia_zhead
+[japanesevowels s2] method=gi_spg_pia_zhead
+[japanesevowels s2] method=task_guided_latent_residual_flow
+[japanesevowels s2] method=wdba_sameclass
+[japanesevowels s2] method=dba_sameclass
+[japanesevowels s3] fitting no_aug baseline
+[japanesevowels s3] method=csta_topk_uniform_top5
+[japanesevowels s3] method=random_cov_state
+[japanesevowels s3] method=csta_template_random_within_bank
+[japanesevowels s3] method=spg_pia_zhead
+[japanesevowels s3] method=gi_spg_pia_zhead
+[japanesevowels s3] method=task_guided_latent_residual_flow
+[japanesevowels s3] method=wdba_sameclass
+[japanesevowels s3] method=dba_sameclass
+[racketsports s1] fitting no_aug baseline
+[racketsports s1] method=csta_topk_uniform_top5
+[racketsports s1] method=random_cov_state
+[racketsports s1] method=csta_template_random_within_bank
+[racketsports s1] method=spg_pia_zhead
+[racketsports s1] method=gi_spg_pia_zhead
+[racketsports s1] method=task_guided_latent_residual_flow
+[racketsports s1] method=wdba_sameclass
+[racketsports s1] method=dba_sameclass
+[racketsports s2] fitting no_aug baseline
+[racketsports s2] method=csta_topk_uniform_top5
+[racketsports s2] method=random_cov_state
+[racketsports s2] method=csta_template_random_within_bank
+[racketsports s2] method=spg_pia_zhead
+[racketsports s2] method=gi_spg_pia_zhead
+[racketsports s2] method=task_guided_latent_residual_flow
+[racketsports s2] method=wdba_sameclass
+[racketsports s2] method=dba_sameclass
+[racketsports s3] fitting no_aug baseline
+[racketsports s3] method=csta_topk_uniform_top5
+[racketsports s3] method=random_cov_state
+[racketsports s3] method=csta_template_random_within_bank
+[racketsports s3] method=spg_pia_zhead
+[racketsports s3] method=gi_spg_pia_zhead
+[racketsports s3] method=task_guided_latent_residual_flow
+[racketsports s3] method=wdba_sameclass
+[racketsports s3] method=dba_sameclass

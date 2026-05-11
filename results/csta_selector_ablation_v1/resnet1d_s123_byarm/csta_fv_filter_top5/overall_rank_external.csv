@@ -1,0 +1,2 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_fv_filter_top5,7,0.6405168366406871,1.0,7

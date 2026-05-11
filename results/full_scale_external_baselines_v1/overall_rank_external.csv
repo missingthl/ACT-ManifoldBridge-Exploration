@@ -1,0 +1,8 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+raw_aug_timewarp,1,0.9628856711377471,1.0,1
+dba_sameclass,1,0.9572815415000319,2.0,0
+raw_aug_jitter,2,0.9539939207945788,2.5,1
+raw_aug_scaling,1,0.9532802159934785,3.0,0
+wdba_sameclass,1,0.9471451759840152,5.0,0
+raw_mixup,1,0.9296079267520693,6.0,0
+raw_smote_flatten_balanced,1,0.9216425322831762,7.0,0

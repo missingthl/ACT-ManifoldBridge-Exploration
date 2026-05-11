@@ -1,0 +1,2 @@
+comparison,n_datasets,n_seeds,mean_f1_a,mean_f1_b,mean_delta,median_delta,std_delta,dataset_win,dataset_loss,dataset_tie,seed_win,seed_loss,seed_tie,bootstrap_ci_lo,bootstrap_ci_hi,bootstrap_ci_crosses_zero,wilcoxon_dataset_stat,wilcoxon_dataset_p,wilcoxon_seed_stat,wilcoxon_seed_p
+csta_topk_uniform_top5 vs pca_cov_state,20,60,0.7279262531262053,0.7221228731408887,0.005803379985316731,0.0004715403962246567,0.05922099655091284,11,8,1,32,25,3,-0.007738642544499637,0.02152211690932379,True,90.0,0.8405336616716674,753.0,0.559238615813684

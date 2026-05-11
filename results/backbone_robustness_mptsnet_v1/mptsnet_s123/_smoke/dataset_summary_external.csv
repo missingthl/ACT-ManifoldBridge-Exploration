@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+natops,csta_topk_uniform_top5,0.9048007162483406,,0.14476763650836655,,0.9186091686091687,1440.0,10.0,1

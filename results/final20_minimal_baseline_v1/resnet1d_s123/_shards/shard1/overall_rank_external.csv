@@ -1,0 +1,5 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+dba_sameclass,5,0.6502146823680623,2.4,1
+raw_aug_jitter,5,0.6482197051039053,2.4,2
+pca_cov_state,5,0.6408492618484269,2.4,1
+random_cov_state,5,0.6390883830609195,2.8,1

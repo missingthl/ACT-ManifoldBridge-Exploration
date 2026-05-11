@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+atrialfibrillation,csta_topk_uniform_top5,0.2928010261343595,0.03362865365331912,0.10558530163793327,0.08401633781213091,0.5555555555555555,120.0,10.0,3

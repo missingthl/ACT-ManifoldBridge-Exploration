@@ -1,0 +1,2 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_template_random_within_bank,1,0.7964381983392026,1.0,1

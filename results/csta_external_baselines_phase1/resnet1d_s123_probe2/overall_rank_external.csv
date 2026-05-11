@@ -1,0 +1,12 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_top1_current,2,0.8990086709470217,2.5,0
+dba_sameclass,2,0.8955495590657747,3.5,0
+raw_aug_jitter,2,0.8827824358081787,4.0,0
+pca_cov_state,2,0.9007259261047846,4.5,1
+csta_group_template_top,2,0.8747015780902729,4.5,1
+raw_aug_timewarp,2,0.8864579908984473,5.0,0
+raw_mixup,2,0.8742464725847209,6.5,0
+random_cov_state,2,0.8706734790791819,6.5,0
+raw_aug_scaling,2,0.8462152548016635,9.0,0
+no_aug,2,0.8342819700638863,10.0,0
+raw_smote_flatten_balanced,2,0.8342819700638863,10.0,0

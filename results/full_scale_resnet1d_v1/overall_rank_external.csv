@@ -1,0 +1,5 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+pca_cov_state,20,0.7221228731408889,2.125,8
+csta_topk_uniform_top5,20,0.7287333635251314,2.175,7
+random_cov_state,20,0.7229264764123063,2.325,2
+no_aug,20,0.6874174676803437,3.375,2

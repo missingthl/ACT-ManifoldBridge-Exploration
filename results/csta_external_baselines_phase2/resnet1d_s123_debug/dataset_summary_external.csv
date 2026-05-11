@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+atrialfibrillation,raw_aug_magnitude_warping,0.16666666666666666,,0.0,,0.16666666666666666,24.0,2.0,1

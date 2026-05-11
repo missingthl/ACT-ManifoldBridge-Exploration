@@ -1,0 +1,7 @@
+dataset,wdba_sameclass,csta_top1_minus_wdba_sameclass,csta_group_minus_wdba_sameclass,csta_group_minus_csta_top1
+basicmotions,1.0,,,
+cricket,0.0747549019607843,,,
+ethanolconcentration,0.2838204901117192,,,
+har,0.9516529298591497,,,
+motorimagery,0.408425344758768,,,
+selfregulationscp2,0.5064348862751297,,,

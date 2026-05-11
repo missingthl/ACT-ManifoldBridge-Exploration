@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 1152, in <module>
+    main()
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 1148, in main
+    run(args)
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 930, in run
+    csta_res = _run_csta_method(dataset, seed, method, args, out_root)
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 621, in _run_csta_method
+    raise RuntimeError(f"{method} failed for {dataset} seed {seed}; see {log_path}")
+RuntimeError: csta_topk_uniform_top5 failed for natops seed 1; see standalone_projects/ACT_ManifoldBridge/results/backbone_robustness_mptsnet_v1/mptsnet_s123/_smoke/_csta_runs/csta_topk_uniform_top5/natops/s1/run.log
+ERROR conda.cli.main_run:execute(142): `conda run python standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py --datasets natops --arms csta_topk_uniform_top5 --seeds 1 --out-root standalone_projects/ACT_ManifoldBridge/results/backbone_robustness_mptsnet_v1/mptsnet_s123/_smoke --locked-phase1-root standalone_projects/ACT_ManifoldBridge/results/csta_external_baselines_phase1/resnet1d_s123 --backbone mptsnet --epochs 10 --batch-size 64 --lr 1e-3 --patience 5 --val-ratio 0.2 --multiplier 10 --k-dir 10 --device cuda --fail-fast` failed. (See above for error)
+[natops s1] fitting no_aug baseline
+[natops s1] method=csta_topk_uniform_top5

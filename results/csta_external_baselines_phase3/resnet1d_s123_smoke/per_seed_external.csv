@@ -1,0 +1,2 @@
+dataset,seed,method,status,fail_reason,base_f1,aug_f1,gain,aug_count,aug_ratio,actual_aug_ratio,source_space,label_mode,backbone,train_split_only,uses_external_library,library_name,budget_matched,selection_rule,best_val_f1,stop_epoch,warning_count,fallback_count,method_elapsed_sec,manifold_mixup_alpha
+natops,1,manifold_mixup,success,,0.20725055023629438,0.19061421737132053,-0.016636332864973846,0,0.0,0.0,hidden_state,soft,resnet1d,True,False,none,False,resnet1d_hidden_state_beta_mixup,0.17777777777777778,1,0,0,0.11590186299872585,0.4
