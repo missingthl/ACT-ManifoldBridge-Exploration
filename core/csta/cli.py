@@ -46,6 +46,7 @@ def main():
             "rn_ecl_spg_pia_zhead",
             "rn_ecl_spg_pia_zhead_deterministic",
             "gi_spg_pia_zhead",
+            "spg_cfm_one_step",
         ],
         default="lraes",
     )
@@ -148,6 +149,14 @@ def main():
     parser.add_argument("--gi-spg-hidden-dim", type=int, default=0)
     parser.add_argument("--gi-spg-ridge", type=float, default=1e-3)
     parser.add_argument("--gi-spg-activation", type=str, choices=["tanh", "sigmoid", "none"], default="tanh")
+    parser.add_argument("--spg-cfm-flow-epochs", type=int, default=50)
+    parser.add_argument("--spg-cfm-flow-batch-size", type=int, default=128)
+    parser.add_argument("--spg-cfm-flow-lr", type=float, default=1e-3)
+    parser.add_argument("--spg-cfm-flow-weight-decay", type=float, default=1e-4)
+    parser.add_argument("--spg-cfm-hidden-layers", type=int, default=2)
+    parser.add_argument("--spg-cfm-hidden-width", type=int, default=0)
+    parser.add_argument("--spg-cfm-class-embedding-dim", type=int, default=0)
+    parser.add_argument("--spg-cfm-lambda-cos", type=float, default=0.5)
     parser.add_argument("--audit-method-label", type=str, default="")
     args = parser.parse_args()
 

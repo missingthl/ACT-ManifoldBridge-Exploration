@@ -149,6 +149,9 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
     elif method == "gi_spg_pia_zhead":
         algo_name = method
         selection = None
+    elif method == "spg_cfm_one_step":
+        algo_name = method
+        selection = None
     else:
         algo_name = "zpia_top1_pool"
         selection = None
@@ -360,6 +363,27 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
                 str(args.gi_spg_ridge),
                 "--gi-spg-activation",
                 str(args.gi_spg_activation),
+            ]
+        )
+    if method == "spg_cfm_one_step":
+        cmd.extend(
+            [
+                "--spg-cfm-flow-epochs",
+                str(args.spg_cfm_flow_epochs),
+                "--spg-cfm-flow-batch-size",
+                str(args.spg_cfm_flow_batch_size),
+                "--spg-cfm-flow-lr",
+                str(args.spg_cfm_flow_lr),
+                "--spg-cfm-flow-weight-decay",
+                str(args.spg_cfm_flow_weight_decay),
+                "--spg-cfm-hidden-layers",
+                str(args.spg_cfm_hidden_layers),
+                "--spg-cfm-hidden-width",
+                str(args.spg_cfm_hidden_width),
+                "--spg-cfm-class-embedding-dim",
+                str(args.spg_cfm_class_embedding_dim),
+                "--spg-cfm-lambda-cos",
+                str(args.spg_cfm_lambda_cos),
             ]
         )
     if selection is not None:
@@ -703,6 +727,7 @@ def run(args) -> List[Dict[str, object]]:
                         or method.startswith("ecl_spg_pia_")
                         or method.startswith("rn_ecl_spg_pia_")
                         or method.startswith("gi_spg_pia_")
+                        or method.startswith("spg_cfm_")
                     ):
                         csta_res = _run_csta_method(dataset, seed, method, args, out_root)
                         elapsed = time.perf_counter() - t0
@@ -926,6 +951,14 @@ def main() -> None:
     parser.add_argument("--gi-spg-hidden-dim", type=int, default=0)
     parser.add_argument("--gi-spg-ridge", type=float, default=1e-3)
     parser.add_argument("--gi-spg-activation", type=str, default="tanh")
+    parser.add_argument("--spg-cfm-flow-epochs", type=int, default=50)
+    parser.add_argument("--spg-cfm-flow-batch-size", type=int, default=128)
+    parser.add_argument("--spg-cfm-flow-lr", type=float, default=1e-3)
+    parser.add_argument("--spg-cfm-flow-weight-decay", type=float, default=1e-4)
+    parser.add_argument("--spg-cfm-hidden-layers", type=int, default=2)
+    parser.add_argument("--spg-cfm-hidden-width", type=int, default=0)
+    parser.add_argument("--spg-cfm-class-embedding-dim", type=int, default=0)
+    parser.add_argument("--spg-cfm-lambda-cos", type=float, default=0.5)
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--mixup-alpha", type=float, default=0.4)
     parser.add_argument("--dba-k", type=int, default=5)

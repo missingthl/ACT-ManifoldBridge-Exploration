@@ -11,6 +11,7 @@ from core.csta.pipelines import (
     _run_act_zpia_template_pool_pipeline,
     _run_cs_flow_pipeline,
     _run_gi_spg_pia_pipeline,
+    _run_spg_cfm_pipeline,
     _run_latent_residual_pipeline,
     _run_lc_latent_pipeline,
     _run_spg_pia_pipeline,
@@ -95,6 +96,25 @@ def run_experiment(dataset_name, args):
                 )
             elif args.algo == "gi_spg_pia_zhead":
                 pipeline_out = _run_gi_spg_pia_pipeline(
+                    args=args,
+                    seed=seed,
+                    X_train_raw=X_train_raw,
+                    y_train=y_train,
+                    X_val_raw=X_val_raw,
+                    y_val=y_val,
+                    X_test_raw=X_test_raw,
+                    y_test=y_test,
+                    X_train_z=X_train_z,
+                    train_recs=train_recs,
+                    mean_log=mean_log,
+                    epochs=epochs,
+                    lr=lr,
+                    batch_size=batch_size,
+                    patience=patience,
+                    method=args.algo,
+                )
+            elif args.algo == "spg_cfm_one_step":
+                pipeline_out = _run_spg_cfm_pipeline(
                     args=args,
                     seed=seed,
                     X_train_raw=X_train_raw,

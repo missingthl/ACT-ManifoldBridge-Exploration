@@ -188,6 +188,27 @@ GI_SPG_RESULT_FIELDS = [
     "gi_spg_activation",
 ]
 
+SPG_CFM_RESULT_FIELDS = [
+    "spg_cfm_train_mse_mean",
+    "spg_cfm_train_cosine_mean",
+    "spg_cfm_pred_target_cosine_mean",
+    "spg_cfm_generated_direction_pairwise_cosine_mean",
+    "spg_cfm_effective_aug_multiplier",
+    "spg_cfm_alignment_to_spg_mean",
+    "spg_cfm_projection_energy_mean",
+    "spg_cfm_projection_energy_std",
+    "spg_cfm_condition_norm_mean",
+    "spg_cfm_condition_norm_std",
+    "spg_zhead_train_acc",
+    "gamma_used_ratio_mean",
+    "augmentation_build_time_sec",
+    "spg_cfm_zhead_time_sec",
+    "spg_cfm_condition_time_sec",
+    "spg_cfm_train_time_sec",
+    "spg_cfm_generation_time_sec",
+    "generation_time_per_aug_sample_ms",
+]
+
 
 def build_failure_result_row(*, dataset_name: str, seed: int, args, fail_reason: str) -> Dict[str, object]:
     return {
@@ -401,6 +422,21 @@ def build_success_result_row(
             }
         )
         for key in GI_SPG_RESULT_FIELDS:
+            if key in pipeline_out:
+                summary[key] = pipeline_out[key]
+    if args.algo == "spg_cfm_one_step":
+        summary.update(
+            {
+                "utilization_mode": "core_concat",
+                "core_training_mode": "concat_all",
+                "aug_train_ratio": float(pipeline_out.get("aug_total_count", 0)) / max(float(len(y_train)), 1.0),
+                "direction_source": "spg_conditioned_cfm_operator",
+                "source_space": "covariance_state_spg_conditioned_cfm",
+                "operator_source": str(args.algo),
+                "template_selection": "none",
+            }
+        )
+        for key in SPG_CFM_RESULT_FIELDS:
             if key in pipeline_out:
                 summary[key] = pipeline_out[key]
     if direction_meta.get("bank_source") == "zpia_telm2" or args.algo == "zpia":

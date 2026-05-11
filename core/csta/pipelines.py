@@ -10,6 +10,7 @@ from .ag_pia import build_ag_pia_aug_out
 from .cs_flow import build_cs_flow_aug_out
 from .latent_residual_flow import build_latent_residual_aug_out
 from .lc_latent_residual_flow import build_lc_latent_aug_out
+from .spg_cfm import build_spg_cfm_aug_out
 from .spg_pia import build_spg_pia_aug_out, build_gi_spg_pia_aug_out
 from .task_guided_latent_residual_flow import build_task_guided_latent_aug_out
 from .augment_builders import (
@@ -50,6 +51,27 @@ AG_SUMMARY_FIELDS = [
     "ag_ridge",
     "ag_activation",
     "effective_k_ag_heads",
+]
+
+SPG_CFM_SUMMARY_FIELDS = [
+    "spg_cfm_train_mse_mean",
+    "spg_cfm_train_cosine_mean",
+    "spg_cfm_pred_target_cosine_mean",
+    "spg_cfm_generated_direction_pairwise_cosine_mean",
+    "spg_cfm_effective_aug_multiplier",
+    "spg_cfm_alignment_to_spg_mean",
+    "spg_cfm_projection_energy_mean",
+    "spg_cfm_projection_energy_std",
+    "spg_cfm_condition_norm_mean",
+    "spg_cfm_condition_norm_std",
+    "spg_zhead_train_acc",
+    "gamma_used_ratio_mean",
+    "augmentation_build_time_sec",
+    "spg_cfm_zhead_time_sec",
+    "spg_cfm_condition_time_sec",
+    "spg_cfm_train_time_sec",
+    "spg_cfm_generation_time_sec",
+    "generation_time_per_aug_sample_ms",
 ]
 
 CS_FLOW_SUMMARY_FIELDS = [
@@ -278,6 +300,9 @@ def _common_aug_pipeline_payload(*, aug_out: Dict[str, object], alignment_metric
         if key in aug_out:
             payload[key] = aug_out[key]
     for key in GI_SPG_SUMMARY_FIELDS:
+        if key in aug_out:
+            payload[key] = aug_out[key]
+    for key in SPG_CFM_SUMMARY_FIELDS:
         if key in aug_out:
             payload[key] = aug_out[key]
     return payload
@@ -1495,3 +1520,86 @@ def _run_act_rc4_fused_pipeline(
         fusion_mode="rank1_osf",
         algo_label="rc4_fused",
     )
+
+
+def _run_spg_cfm_pipeline(
+    *,
+    args,
+    seed: int,
+    X_train_raw: np.ndarray,
+    y_train: np.ndarray,
+    X_val_raw: Optional[np.ndarray],
+    y_val: Optional[np.ndarray],
+    X_test_raw: np.ndarray,
+    y_test: np.ndarray,
+    X_train_z: np.ndarray,
+    train_recs: List[TrialRecord],
+    mean_log: np.ndarray,
+    epochs: int,
+    lr: float,
+    batch_size: int,
+    patience: int,
+    method: str,
+) -> Dict[str, object]:
+    if args.model != "resnet1d":
+        raise ValueError("SPG-CFM is ResNet1D-only.")
+
+    print("Fitting baseline...")
+    res_base = _fit_host_model(
+        args=args,
+        X_tr=X_train_raw,
+        y_tr=y_train,
+        X_val_raw=X_val_raw,
+        y_val=y_val,
+        X_test_raw=X_test_raw,
+        y_test=y_test,
+        epochs=epochs,
+        lr=lr,
+        batch_size=batch_size,
+        patience=patience,
+        return_model_obj=args.theory_diagnostics,
+        loader_seed=seed,
+    )
+    aug_out = build_spg_cfm_aug_out(
+        args=args,
+        seed=seed,
+        X_train_z=X_train_z,
+        y_train=y_train,
+        train_recs=train_recs,
+        mean_log=mean_log,
+        method=method,
+    )
+    if aug_out["aug_trials"]:
+        X_mix = np.concatenate([X_train_raw, aug_out["X_aug_raw"]], axis=0)
+        y_mix = np.concatenate([y_train, aug_out["y_aug_np"]], axis=0)
+    else:
+        X_mix = X_train_raw
+        y_mix = y_train
+    alignment_metrics = _run_analysis_probe(
+        args=args,
+        model_obj=res_base.get("model_obj"),
+        tid_aug=aug_out["tid_aug"],
+        X_aug=aug_out["X_aug_raw"],
+        tid_to_rec=aug_out["tid_to_rec"],
+    )
+    print(f"Fitting SPG-CFM model ({len(X_mix)} samples)...")
+    res_act = _fit_host_model(
+        args=args,
+        X_tr=X_mix,
+        y_tr=y_mix,
+        X_val_raw=X_val_raw,
+        y_val=y_val,
+        X_test_raw=X_test_raw,
+        y_test=y_test,
+        epochs=epochs,
+        lr=lr,
+        batch_size=batch_size,
+        patience=patience,
+        loader_seed=seed,
+    )
+    res_base.pop("model_obj", None)
+    res_act.pop("model_obj", None)
+
+    payload = _common_aug_pipeline_payload(aug_out=aug_out, alignment_metrics=alignment_metrics, X_train_z=X_train_z)
+    payload.update({"res_base": res_base, "res_act": res_act})
+    return payload
