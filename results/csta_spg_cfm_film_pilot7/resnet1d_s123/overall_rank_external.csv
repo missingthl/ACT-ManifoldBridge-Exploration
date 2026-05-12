@@ -1,0 +1,4 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_topk_uniform_top5,7,0.6652418044749704,1.8571428571428572,3
+spg_cfm_one_step,7,0.6549103452476899,1.8571428571428572,3
+spg_cfm_film_one_step,7,0.6522053660615731,2.2857142857142856,1

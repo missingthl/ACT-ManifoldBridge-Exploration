@@ -1,0 +1,3 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+csta_topk_uniform_top5,8,0.7825380846360319,1.25,6
+no_aug,8,0.7274377449068659,1.75,2

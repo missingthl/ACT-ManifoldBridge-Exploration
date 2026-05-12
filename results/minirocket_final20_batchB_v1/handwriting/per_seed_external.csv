@@ -1,0 +1,2 @@
+dataset,seed,method,status,fail_reason,base_f1,aug_f1,gain,aug_count,aug_ratio,actual_aug_ratio,source_space,label_mode,backbone,train_split_only,uses_external_library,library_name,budget_matched,selection_rule,best_val_f1,stop_epoch,warning_count,fallback_count,method_elapsed_sec,transport_error_logeuc_mean
+handwriting,1,random_cov_state,success,,0.39670181407065047,0.47384587682699136,0.07714406275634089,1200,10.0,10.0,covariance_state,hard,minirocket,True,False,none,True,random_unit_z_direction,,0,0,0,25.162583254976198,0.0003234982522515674

@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+articularywordrecognition,random_cov_state,0.9899826086956521,,0.0,,,2200.0,10.0,1

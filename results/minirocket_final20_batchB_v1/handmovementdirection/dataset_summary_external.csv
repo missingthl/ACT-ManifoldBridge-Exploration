@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+handmovementdirection,random_cov_state,0.361552646914489,,0.022003774734037918,,,1280.0,10.0,1

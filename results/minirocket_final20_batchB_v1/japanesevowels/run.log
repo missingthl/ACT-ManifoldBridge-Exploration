@@ -1,0 +1,19 @@
+[japanesevowels s1] fitting no_aug baseline
+Traceback (most recent call last):
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 1009, in <module>
+    main()
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 1005, in main
+    run(args)
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 696, in run
+    base_res = _fit_hard(X_train, y_train, X_val, y_val, X_test, y_test, args, seed)
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/scripts/run_external_baselines_phase1.py", line 67, in _fit_hard
+    return fit_hard_backbone(
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/utils/backbone_trainers.py", line 62, in fit_hard_backbone
+    return fit_eval_minirocket(model, X_train, y_train, X_test, y_test)
+  File "/home/THL/project/MTS-PIA/standalone_projects/ACT_ManifoldBridge/utils/evaluators.py", line 179, in fit_eval_minirocket
+    y_pred = model.predict(X_test)
+  File "/home/THL/miniconda3/envs/pia/lib/python3.10/site-packages/aeon/classification/base.py", line 158, in predict
+    self._check_shape(X)
+  File "/home/THL/miniconda3/envs/pia/lib/python3.10/site-packages/aeon/base/_base_collection.py", line 286, in _check_shape
+    raise ValueError(
+ValueError: ('X has different length to the data seen in fit but this classifier cannot handle unequal length series.length of train set was 26', ' length in predict is 29.')

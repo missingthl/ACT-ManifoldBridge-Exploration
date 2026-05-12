@@ -1,0 +1,2 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+heartbeat,no_aug,0.6907993966817496,,0.0,,,0.0,0.0,1

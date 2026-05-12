@@ -14,7 +14,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from sklearn.metrics import accuracy_score, f1_score
 from torch.utils.data import DataLoader, Dataset, TensorDataset
-from aeon.classification.convolution_based import MultiRocketHydraClassifier
+from aeon.classification.convolution_based import MiniRocketClassifier
 
 # Local imports
 from core.resnet1d import ResNet1DClassifier
@@ -162,7 +162,7 @@ class EarlyStopping:
             self.counter = 0
 
 def build_model(n_kernels: int = 10000, random_state: int = 42, n_jobs: int = 1):
-    return MultiRocketHydraClassifier(
+    return MiniRocketClassifier(
         n_kernels=n_kernels,
         random_state=random_state,
         n_jobs=n_jobs

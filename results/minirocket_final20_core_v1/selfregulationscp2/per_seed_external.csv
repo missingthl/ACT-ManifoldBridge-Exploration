@@ -1,0 +1,2 @@
+dataset,seed,method,status,fail_reason,base_f1,aug_f1,gain,aug_count,aug_ratio,actual_aug_ratio,source_space,label_mode,backbone,train_split_only,uses_external_library,library_name,budget_matched,selection_rule,best_val_f1,stop_epoch,warning_count,fallback_count,method_elapsed_sec
+selfregulationscp2,1,no_aug,success,,0.46660081491542166,0.46660081491542166,0.0,0,0.0,0.0,none,hard,minirocket,True,False,none,True,none,,0,0,0,0.0

@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+racketsports,random_cov_state,0.8838843387596583,0.022782609040301664,0.0042313176154631,0.02579448779637037,,1200.0,10.0,3
+racketsports,pca_cov_state,0.878973862024503,0.02558547393952895,-0.0006791591196924074,0.030760489341345062,,1200.0,10.0,3

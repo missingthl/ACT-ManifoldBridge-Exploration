@@ -1,0 +1,2 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+no_aug,1,0.47206654744054055,1.0,1
