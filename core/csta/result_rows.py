@@ -191,16 +191,19 @@ GI_SPG_RESULT_FIELDS = [
 SPG_CFM_RESULT_FIELDS = [
     "spg_cfm_train_mse_mean",
     "spg_cfm_train_cosine_mean",
-    "spg_cfm_pred_target_cosine_mean",
+    "spg_cfm_train_pred_target_cosine_mean",
+    "spg_cfm_generation_pred_target_cosine_mean",
     "spg_cfm_generated_direction_pairwise_cosine_mean",
     "spg_cfm_effective_aug_multiplier",
     "spg_cfm_alignment_to_spg_mean",
+    "spg_cfm_steps",
     "spg_cfm_projection_energy_mean",
     "spg_cfm_projection_energy_std",
     "spg_cfm_condition_norm_mean",
     "spg_cfm_condition_norm_std",
     "spg_zhead_train_acc",
     "gamma_used_ratio_mean",
+    "transport_error_logeuc_mean",
     "augmentation_build_time_sec",
     "spg_cfm_zhead_time_sec",
     "spg_cfm_condition_time_sec",
@@ -424,7 +427,7 @@ def build_success_result_row(
         for key in GI_SPG_RESULT_FIELDS:
             if key in pipeline_out:
                 summary[key] = pipeline_out[key]
-    if args.algo == "spg_cfm_one_step":
+    if args.algo in {"spg_cfm_one_step", "spg_cfm_k3"}:
         summary.update(
             {
                 "utilization_mode": "core_concat",

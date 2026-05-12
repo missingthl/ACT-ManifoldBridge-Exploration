@@ -149,7 +149,7 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
     elif method == "gi_spg_pia_zhead":
         algo_name = method
         selection = None
-    elif method == "spg_cfm_one_step":
+    elif method in {"spg_cfm_one_step", "spg_cfm_k3"}:
         algo_name = method
         selection = None
     else:
@@ -365,7 +365,7 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
                 str(args.gi_spg_activation),
             ]
         )
-    if method == "spg_cfm_one_step":
+    if method in {"spg_cfm_one_step", "spg_cfm_k3"}:
         cmd.extend(
             [
                 "--spg-cfm-flow-epochs",

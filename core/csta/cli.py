@@ -47,6 +47,7 @@ def main():
             "rn_ecl_spg_pia_zhead_deterministic",
             "gi_spg_pia_zhead",
             "spg_cfm_one_step",
+            "spg_cfm_k3",
         ],
         default="lraes",
     )

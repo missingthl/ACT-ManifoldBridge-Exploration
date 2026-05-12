@@ -14,7 +14,7 @@ from .materialize import materialize_z_aug_out
 from .spg_pia import SPGPIAConfig, compute_spg_gradients, fit_zhead_classifier
 from .state import TrialRecord
 
-SPG_CFM_METHODS = {"spg_cfm_one_step"}
+SPG_CFM_METHODS = {"spg_cfm_one_step", "spg_cfm_k3"}
 
 
 @dataclass(frozen=True)
@@ -282,20 +282,7 @@ def build_spg_cfm_aug_out(
     t0_cond = time.perf_counter()
     grads = compute_spg_gradients(Z, y_arr, zhead=zhead)
     
-    s_hat = np.zeros_like(grads)
-    E = np.zeros((len(Z),), dtype=np.float64)
-    for i in range(len(Z)):
-        g_i = grads[i]
-        # P_S is implicit here, we just use g_i directly since Z is the space. 
-        # But wait, SPG does Support Projection. P_S is the projection onto the tangent space.
-        # Let's use the local covariance state rank normalized projection like SPG-PIA.
-        # Actually, the user specification says: P_S gradient. In TELM2 it's the projection matrix.
-        # But for simplicity, we can do a global PCA projection or just use g_i if Z is already low-dim.
-        # Let's check SPG-PIA's exact implementation: it uses _support_projector(bank).
-        pass
-
     # Re-use SPG projector logic:
-    # Actually, we need the `_support_projector` from `spg_pia`.
     from .spg_pia import _support_projector, build_zpia_direction_bank
     bank, _ = build_zpia_direction_bank(
         Z,
@@ -309,6 +296,8 @@ def build_spg_cfm_aug_out(
     project, _, _ = _support_projector(bank, ridge=float(cfg.projection_ridge), eps=float(cfg.eps))
     
     proj_grads = np.stack([project(g) for g in grads]).astype(np.float64)
+    s_hat = np.zeros_like(grads)
+    E = np.zeros((len(Z),), dtype=np.float64)
     for i in range(len(Z)):
         g_i = grads[i]
         p_i = proj_grads[i]
@@ -340,18 +329,25 @@ def build_spg_cfm_aug_out(
     tid_aug: List[object] = []
     rows: List[Dict[str, object]] = []
     
-    pred_cosines: List[float] = []
     gammas_used: List[float] = []
+    
+    n_steps = 3 if method == "spg_cfm_k3" else 1
     
     for i in range(len(Z)):
         for c in range(multiplier):
-            eps_vec, _ = _unit(rng.normal(size=(Z.shape[1],)), eps=float(cfg.eps))
+            eps_vec, eps_norm = _unit(rng.normal(size=(Z.shape[1],)), eps=float(cfg.eps))
             
-            # Predict velocity
-            pred_u = _predict_spg_cfm_velocity(op, Z[i], int(y_arr[i]), s_hat[i], E[i], eps_vec, 0.0)
+            # Multi-step generation (Euler integration)
+            r_vec = eps_vec.copy()
+            u_norms = []
+            for k in range(n_steps):
+                t_val = float(k) / float(n_steps)
+                pred_u = _predict_spg_cfm_velocity(op, Z[i], int(y_arr[i]), s_hat[i], E[i], r_vec, t_val)
+                u_norms.append(float(np.linalg.norm(pred_u)))
+                r_vec = r_vec + (1.0 / float(n_steps)) * pred_u
             
             # Compute trajectory
-            r_hat = eps_vec + pred_u
+            r_hat = r_vec
             direction, direction_norm = _unit(r_hat, eps=float(cfg.eps))
             
             if direction_norm <= float(cfg.eps):
@@ -373,8 +369,6 @@ def build_spg_cfm_aug_out(
             gammas_used.append(float(gamma_used))
             
             # Record keeping
-            # For audit target matching (to get pred_target_cos), we don't have a specific target since generation is unconstrained
-            # However we can evaluate cosine with the SPG direction directly
             align_to_spg = _cosine(direction, s_hat[i], eps=float(cfg.eps))
             
             rows.append({
@@ -386,9 +380,24 @@ def build_spg_cfm_aug_out(
                 "template_rank": -1,
                 "template_response_abs": np.nan,
                 "direction_id": -1,
+                # SPG-CFM specific audit
+                "spg_cfm_t": 1.0, # Final integration point
+                "spg_cfm_steps": int(n_steps),
+                "spg_cfm_eps_norm": float(eps_norm),
+                "spg_cfm_pred_velocity_norm": float(np.mean(u_norms)),
+                "spg_cfm_r_hat_norm": float(np.linalg.norm(r_hat)),
                 "spg_cfm_alignment_to_spg": float(align_to_spg),
-                "gamma_used": float(gamma_used),
+                "spg_projection_energy": float(E[i]),
+                "spg_condition_norm": float(np.linalg.norm(s_hat[i])),
+                # Standard manifold audit
                 "gamma_requested": float(gamma_requested),
+                "gamma_used": float(gamma_used),
+                "gamma_used_ratio": float(gamma_used / gamma_requested) if abs(gamma_requested) > 1e-12 else 1.0,
+                "pre_safe_displacement_norm": float(gamma_requested),
+                "post_safe_displacement_norm": float(gamma_used),
+                "z_displacement_norm": float(gamma_used),
+                "safe_radius_ratio": float(safe_upper_bound / gamma_requested) if abs(gamma_requested) > 1e-12 else 1.0,
+                "manifold_margin": float(d_min),
                 "is_clipped": float(gamma_requested > safe_upper_bound + 1e-9),
                 "_direction_vec": direction,
             })
@@ -420,16 +429,19 @@ def build_spg_cfm_aug_out(
     extra_meta = {
         "spg_cfm_train_mse_mean": float(op["summary"]["spg_cfm_train_mse_mean"]),
         "spg_cfm_train_cosine_mean": float(op["summary"]["spg_cfm_train_cosine_mean"]),
-        "spg_cfm_pred_target_cosine_mean": float(np.nan), # Only valid on train set directly
+        "spg_cfm_train_pred_target_cosine_mean": float(op["summary"]["spg_cfm_train_cosine_mean"]),
+        "spg_cfm_generation_pred_target_cosine_mean": float(np.nan),
         "spg_cfm_generated_direction_pairwise_cosine_mean": float(np.nanmean(pairwise_cosines)) if pairwise_cosines else np.nan,
         "spg_cfm_effective_aug_multiplier": float(np.mean(effective_multipliers)) if effective_multipliers else 1.0,
         "spg_cfm_alignment_to_spg_mean": float(np.nanmean([r["spg_cfm_alignment_to_spg"] for r in rows])),
+        "spg_cfm_steps": int(n_steps),
         "spg_cfm_projection_energy_mean": float(np.mean(E)),
         "spg_cfm_projection_energy_std": float(np.std(E)),
         "spg_cfm_condition_norm_mean": float(np.mean(np.linalg.norm(s_hat, axis=1))),
         "spg_cfm_condition_norm_std": float(np.std(np.linalg.norm(s_hat, axis=1))),
-        "spg_zhead_train_acc": float(zhead.get("train_acc", np.nan)),
+        "spg_zhead_train_acc": float(zhead.get("spg_zhead_train_acc", np.nan)),
         "gamma_used_ratio_mean": float(np.mean([g / gamma_requested for g in gammas_used])) if abs(gamma_requested) > 0 else np.nan,
+        "transport_error_logeuc_mean": float(np.nan), # Not applicable for CFM generation typically
         
         # Timing metrics
         "augmentation_build_time_sec": float(t_build_total),
