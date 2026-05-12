@@ -269,6 +269,28 @@ def normalize_candidate_audit_rows(
                 "safe_generator": "local_margin_safe_step",
                 "bridge_realizer": "whitening_coloring",
             }
+        if str(row.get("direction_source", "")) == "spg_conditioned_cfm_film_operator":
+            operator_meta = {
+                "operator_name": "SPG-CFM-FiLM",
+                "dictionary_estimator": "spg_conditioned_flow_matching_film",
+                "activation_policy": str(row.get("selector_name", activation_policy)),
+                "activation_scope": "anchor_conditioned_cfm_film",
+                "activation_topk": np.nan,
+                "activation_tau": np.nan,
+                "safe_generator": "local_margin_safe_step",
+                "bridge_realizer": "whitening_coloring",
+            }
+        if str(row.get("direction_source", "")) == "spg_conditioned_cfm_align_operator":
+            operator_meta = {
+                "operator_name": "SPG-CFM-Align",
+                "dictionary_estimator": "spg_conditioned_flow_matching_align",
+                "activation_policy": str(row.get("selector_name", activation_policy)),
+                "activation_scope": "anchor_conditioned_cfm_align",
+                "activation_topk": np.nan,
+                "activation_tau": np.nan,
+                "safe_generator": "local_margin_safe_step",
+                "bridge_realizer": "whitening_coloring",
+            }
         tid = row.get("tid", "")
         candidate_order = row.get("candidate_order", fallback_slot)
         slot_index = row.get("slot_index", fallback_slot)

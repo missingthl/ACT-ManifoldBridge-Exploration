@@ -113,7 +113,7 @@ def run_experiment(dataset_name, args):
                     patience=patience,
                     method=args.algo,
                 )
-            elif args.algo in {"spg_cfm_one_step", "spg_cfm_k3"}:
+            elif args.algo in {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}:
                 pipeline_out = _run_spg_cfm_pipeline(
                     args=args,
                     seed=seed,

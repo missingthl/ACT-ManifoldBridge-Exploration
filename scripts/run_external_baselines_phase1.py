@@ -149,7 +149,7 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
     elif method == "gi_spg_pia_zhead":
         algo_name = method
         selection = None
-    elif method in {"spg_cfm_one_step", "spg_cfm_k3"}:
+    elif method in {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}:
         algo_name = method
         selection = None
     else:
@@ -365,7 +365,7 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
                 str(args.gi_spg_activation),
             ]
         )
-    if method in {"spg_cfm_one_step", "spg_cfm_k3"}:
+    if method in {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}:
         cmd.extend(
             [
                 "--spg-cfm-flow-epochs",
@@ -378,12 +378,14 @@ def _run_csta_method(dataset: str, seed: int, method: str, args, out_root: Path)
                 str(args.spg_cfm_flow_weight_decay),
                 "--spg-cfm-hidden-layers",
                 str(args.spg_cfm_hidden_layers),
-                "--spg-cfm-hidden-width",
+        "--spg-cfm-hidden-width",
                 str(args.spg_cfm_hidden_width),
                 "--spg-cfm-class-embedding-dim",
                 str(args.spg_cfm_class_embedding_dim),
                 "--spg-cfm-lambda-cos",
-                str(args.spg_cfm_lambda_cos),
+                str(getattr(args, "spg_cfm_lambda_cos", 0.5)),
+                "--spg-cfm-lambda-align",
+                str(getattr(args, "spg_cfm_lambda_align", 0.05)),
             ]
         )
     if selection is not None:
@@ -959,6 +961,7 @@ def main() -> None:
     parser.add_argument("--spg-cfm-hidden-width", type=int, default=0)
     parser.add_argument("--spg-cfm-class-embedding-dim", type=int, default=0)
     parser.add_argument("--spg-cfm-lambda-cos", type=float, default=0.5)
+    parser.add_argument("--spg-cfm-lambda-align", type=float, default=0.05)
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument("--mixup-alpha", type=float, default=0.4)
     parser.add_argument("--dba-k", type=int, default=5)

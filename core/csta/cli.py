@@ -48,6 +48,8 @@ def main():
             "gi_spg_pia_zhead",
             "spg_cfm_one_step",
             "spg_cfm_k3",
+            "spg_cfm_film_one_step",
+            "spg_cfm_align_one_step",
         ],
         default="lraes",
     )
@@ -158,6 +160,7 @@ def main():
     parser.add_argument("--spg-cfm-hidden-width", type=int, default=0)
     parser.add_argument("--spg-cfm-class-embedding-dim", type=int, default=0)
     parser.add_argument("--spg-cfm-lambda-cos", type=float, default=0.5)
+    parser.add_argument("--spg-cfm-lambda-align", type=float, default=0.05)
     parser.add_argument("--audit-method-label", type=str, default="")
     args = parser.parse_args()
 

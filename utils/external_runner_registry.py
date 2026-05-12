@@ -560,6 +560,22 @@ METHOD_INFO: Dict[str, MethodInfo] = {
         True,
         "spg_conditioned_conditional_flow_matching",
     ),
+    "spg_cfm_film_one_step": MethodInfo(
+        "covariance_state_spg_conditioned_cfm",
+        "hard",
+        False,
+        "",
+        True,
+        "spg_conditioned_conditional_flow_matching",
+    ),
+    "spg_cfm_align_one_step": MethodInfo(
+        "covariance_state_spg_conditioned_cfm",
+        "hard",
+        False,
+        "",
+        True,
+        "spg_conditioned_conditional_flow_matching",
+    ),
     "manifold_mixup": MethodInfo("hidden_state", "soft", False, "", False, "resnet1d_hidden_state_beta_mixup"),
     "timevae_classwise_optional": MethodInfo("generative_model", "hard", False, "", False, "classwise_timevae_style_pytorch_cleanroom"),
     "diffusionts_classwise": MethodInfo("generative_model", "hard", True, "Diffusion-TS", True, "classwise_diffusionts_classifier_guidance"),
@@ -645,7 +661,7 @@ def extract_csta_extra_metrics(result_row: Dict[str, object], method: str) -> Di
             "safe_generator": "local_margin_safe_step",
             "bridge_realizer": "whitening_coloring",
         }
-    elif str(method) in {"spg_cfm_one_step", "spg_cfm_k3"}:
+    elif str(method) in {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}:
         extra = {
             "operator_name": "SPG-CFM",
             "dictionary_estimator": "telm2_support_projection",

@@ -427,13 +427,19 @@ def build_success_result_row(
         for key in GI_SPG_RESULT_FIELDS:
             if key in pipeline_out:
                 summary[key] = pipeline_out[key]
-    if args.algo in {"spg_cfm_one_step", "spg_cfm_k3"}:
+    if args.algo in {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}:
         summary.update(
             {
                 "utilization_mode": "core_concat",
                 "core_training_mode": "concat_all",
                 "aug_train_ratio": float(pipeline_out.get("aug_total_count", 0)) / max(float(len(y_train)), 1.0),
-                "direction_source": "spg_conditioned_cfm_operator",
+                "direction_source": (
+                    "spg_conditioned_cfm_film_operator"
+                    if args.algo == "spg_cfm_film_one_step"
+                    else "spg_conditioned_cfm_align_operator"
+                    if args.algo == "spg_cfm_align_one_step"
+                    else "spg_conditioned_cfm_operator"
+                ),
                 "source_space": "covariance_state_spg_conditioned_cfm",
                 "operator_source": str(args.algo),
                 "template_selection": "none",

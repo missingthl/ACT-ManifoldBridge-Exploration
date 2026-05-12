@@ -14,7 +14,7 @@ from .materialize import materialize_z_aug_out
 from .spg_pia import SPGPIAConfig, compute_spg_gradients, fit_zhead_classifier
 from .state import TrialRecord
 
-SPG_CFM_METHODS = {"spg_cfm_one_step", "spg_cfm_k3"}
+SPG_CFM_METHODS = {"spg_cfm_one_step", "spg_cfm_k3", "spg_cfm_film_one_step", "spg_cfm_align_one_step"}
 
 
 @dataclass(frozen=True)
@@ -27,6 +27,8 @@ class SPGCFMConfig:
     hidden_width: int = 0
     class_embedding_dim: int = 0
     lambda_cos: float = 0.5
+    lambda_align: float = 0.0
+    injection_mode: str = "concat"
     eps: float = 1e-12
 
     # SPG Z-head params
@@ -36,6 +38,66 @@ class SPGCFMConfig:
     zhead_weight_decay: float = 1e-4
     zhead_batch_size: int = 128
     projection_ridge: float = 1e-6
+
+
+class _FiLMLayer(nn.Module):
+    def __init__(self, cond_dim: int, hidden_dim: int):
+        super().__init__()
+        self.mod = nn.Linear(cond_dim, hidden_dim * 2)
+        # Initialize to identity: gamma=1 (shift=0), beta=0
+        nn.init.zeros_(self.mod.weight)
+        nn.init.zeros_(self.mod.bias)
+
+    def forward(self, h: torch.Tensor, cond: torch.Tensor) -> torch.Tensor:
+        params = self.mod(cond)
+        gamma_shift, beta = params.chunk(2, dim=-1)
+        return h * (1.0 + gamma_shift) + beta
+
+
+class _SPGCFMFiLMMLP(nn.Module):
+    def __init__(
+        self,
+        *,
+        z_dim: int,
+        n_classes: int,
+        class_embedding_dim: int,
+        hidden_width: int,
+        hidden_layers: int,
+    ):
+        super().__init__()
+        self.embedding = nn.Embedding(n_classes, class_embedding_dim)
+        # State: [z_i, class_emb, r_t, t]
+        state_dim = z_dim + class_embedding_dim + z_dim + 1
+        # Condition: [s_hat_i, E_i]
+        cond_dim = z_dim + 1
+
+        self.input_proj = nn.Linear(state_dim, hidden_width)
+        self.layers = nn.ModuleList()
+        for _ in range(max(1, int(hidden_layers))):
+            self.layers.append(nn.ModuleDict({
+                "film": _FiLMLayer(cond_dim, hidden_width),
+                "act": nn.GELU(),
+                "dense": nn.Linear(hidden_width, hidden_width)
+            }))
+        self.output_head = nn.Linear(hidden_width, z_dim)
+
+    def forward(
+        self, z: torch.Tensor, y: torch.Tensor, s_hat: torch.Tensor, E: torch.Tensor, r_t: torch.Tensor, t: torch.Tensor
+    ) -> torch.Tensor:
+        emb = self.embedding(y)
+        if s_hat.ndim == 1: s_hat = s_hat[:, None]
+        if E.ndim == 1: E = E[:, None]
+        if t.ndim == 1: t = t[:, None]
+
+        state = torch.cat([z, emb, r_t, t], dim=1)
+        cond = torch.cat([s_hat, E], dim=1)
+
+        h = self.input_proj(state)
+        for layer in self.layers:
+            h = layer["film"](h, cond)
+            h = layer["act"](h)
+            h = layer["dense"](h)
+        return self.output_head(h)
 
 
 class _SPGCFMMLP(nn.Module):
@@ -128,13 +190,22 @@ def fit_spg_cfm_operator(
     np.random.seed(int(seed) + 5551)
     dev = torch.device(device if str(device).startswith("cuda") and torch.cuda.is_available() else "cpu")
 
-    model = _SPGCFMMLP(
-        z_dim=z_dim,
-        n_classes=n_classes,
-        class_embedding_dim=emb_dim,
-        hidden_width=hidden_width,
-        hidden_layers=int(cfg.hidden_layers),
-    ).to(dev)
+    if str(cfg.injection_mode) == "film":
+        model = _SPGCFMFiLMMLP(
+            z_dim=z_dim,
+            n_classes=n_classes,
+            class_embedding_dim=emb_dim,
+            hidden_width=hidden_width,
+            hidden_layers=int(cfg.hidden_layers),
+        ).to(dev)
+    else:
+        model = _SPGCFMMLP(
+            z_dim=z_dim,
+            n_classes=n_classes,
+            class_embedding_dim=emb_dim,
+            hidden_width=hidden_width,
+            hidden_layers=int(cfg.hidden_layers),
+        ).to(dev)
 
     ds = TensorDataset(
         torch.from_numpy(np.asarray(Z, dtype=np.float32)),
@@ -170,6 +241,13 @@ def fit_spg_cfm_operator(
             cos_loss = torch.mean(1.0 - torch.sum(pred_n * u_n, dim=1))
 
             loss = mse + float(cfg.lambda_cos) * cos_loss
+
+            if float(cfg.lambda_align) > 0:
+                # Alignment Loss: align pred with s_hat_b
+                # pred_n is already computed above
+                # s_hat_b is unit vector
+                loss_align = - torch.mean(torch.sum(pred_n * s_hat_b, dim=1))
+                loss = loss + float(cfg.lambda_align) * loss_align
 
             opt.zero_grad(set_to_none=True)
             loss.backward()
@@ -215,7 +293,7 @@ def _predict_spg_cfm_velocity(
     eps_vec: np.ndarray,
     t_value: float,
 ) -> np.ndarray:
-    model: _SPGCFMMLP = op["model"]
+    model: nn.Module = op["model"]
     mapping: Dict[int, int] = op["label_mapping"]
     dev: torch.device = op["device"]
     y_idx = mapping[int(y_value)]
@@ -255,12 +333,14 @@ def build_spg_cfm_aug_out(
         hidden_width=int(getattr(args, "spg_cfm_hidden_width", 0)),
         class_embedding_dim=int(getattr(args, "spg_cfm_class_embedding_dim", 0)),
         lambda_cos=float(getattr(args, "spg_cfm_lambda_cos", 0.5)),
+        lambda_align=float(getattr(args, "spg_cfm_lambda_align", 0.15 if method == "spg_cfm_align_one_step" else 0.0)),
         zhead_epochs=int(getattr(args, "spg_zhead_epochs", 50)),
         zhead_hidden_dim=int(getattr(args, "spg_zhead_hidden_dim", 0)),
         zhead_lr=float(getattr(args, "spg_zhead_lr", 1e-3)),
         zhead_weight_decay=float(getattr(args, "spg_zhead_weight_decay", 1e-4)),
         zhead_batch_size=int(getattr(args, "spg_zhead_batch_size", 128)),
         projection_ridge=float(getattr(args, "spg_projection_ridge", 1e-6)),
+        injection_mode="film" if method == "spg_cfm_film_one_step" else "concat",
     )
 
     Z = np.asarray(X_train_z, dtype=np.float64)
@@ -375,7 +455,13 @@ def build_spg_cfm_aug_out(
                 "anchor_index": int(i),
                 "class_id": int(y_arr[i]),
                 "candidate_order": int(c),
-                "direction_source": "spg_conditioned_cfm_operator",
+                "direction_source": (
+                    "spg_conditioned_cfm_film_operator"
+                    if method == "spg_cfm_film_one_step"
+                    else "spg_conditioned_cfm_align_operator"
+                    if method == "spg_cfm_align_one_step"
+                    else "spg_conditioned_cfm_operator"
+                ),
                 "template_id": -1,
                 "template_rank": -1,
                 "template_response_abs": np.nan,
