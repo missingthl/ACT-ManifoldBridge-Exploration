@@ -1,2 +1,3 @@
 dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
-uwavegesturelibrary,no_aug,0.9431920448344071,,0.0,,,0.0,0.0,1
+uwavegesturelibrary,csta_topk_uniform_top5,0.9329377442860948,0.007697510167655024,0.010772496346043381,0.012053167209915474,0.0,960.0,10.0,3
+uwavegesturelibrary,no_aug,0.9221652479400513,0.01921034573392321,0.0,0.0,,0.0,0.0,3

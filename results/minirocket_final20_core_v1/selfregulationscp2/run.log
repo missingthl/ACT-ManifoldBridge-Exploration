@@ -1,0 +1,9 @@
+[selfregulationscp2 s1] fitting no_aug baseline
+[selfregulationscp2 s1] method=no_aug
+[selfregulationscp2 s1] method=csta_topk_uniform_top5
+[selfregulationscp2 s2] fitting no_aug baseline
+[selfregulationscp2 s2] method=no_aug
+[selfregulationscp2 s2] method=csta_topk_uniform_top5
+[selfregulationscp2 s3] fitting no_aug baseline
+[selfregulationscp2 s3] method=no_aug
+[selfregulationscp2 s3] method=csta_topk_uniform_top5

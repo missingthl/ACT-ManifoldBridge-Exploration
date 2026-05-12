@@ -1,0 +1,9 @@
+[racketsports s1] fitting no_aug baseline
+[racketsports s1] method=random_cov_state
+[racketsports s1] method=pca_cov_state
+[racketsports s2] fitting no_aug baseline
+[racketsports s2] method=random_cov_state
+[racketsports s2] method=pca_cov_state
+[racketsports s3] fitting no_aug baseline
+[racketsports s3] method=random_cov_state
+[racketsports s3] method=pca_cov_state

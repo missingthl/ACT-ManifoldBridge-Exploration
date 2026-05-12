@@ -1,0 +1,9 @@
+[japanesevowels s1] fitting no_aug baseline
+[japanesevowels s1] method=random_cov_state
+[japanesevowels s1] method=pca_cov_state
+[japanesevowels s2] fitting no_aug baseline
+[japanesevowels s2] method=random_cov_state
+[japanesevowels s2] method=pca_cov_state
+[japanesevowels s3] fitting no_aug baseline
+[japanesevowels s3] method=random_cov_state
+[japanesevowels s3] method=pca_cov_state

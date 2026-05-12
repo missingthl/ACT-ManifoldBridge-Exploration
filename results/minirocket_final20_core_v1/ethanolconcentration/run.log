@@ -1,0 +1,9 @@
+[ethanolconcentration s1] fitting no_aug baseline
+[ethanolconcentration s1] method=no_aug
+[ethanolconcentration s1] method=csta_topk_uniform_top5
+[ethanolconcentration s2] fitting no_aug baseline
+[ethanolconcentration s2] method=no_aug
+[ethanolconcentration s2] method=csta_topk_uniform_top5
+[ethanolconcentration s3] fitting no_aug baseline
+[ethanolconcentration s3] method=no_aug
+[ethanolconcentration s3] method=csta_topk_uniform_top5

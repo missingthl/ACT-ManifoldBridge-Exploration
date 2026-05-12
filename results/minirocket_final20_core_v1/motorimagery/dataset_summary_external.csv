@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+motorimagery,csta_topk_uniform_top5,0.37359688019734527,0.05198070480604371,0.03098910439214919,0.036878425415187745,0.0,2220.0,10.0,3
+motorimagery,no_aug,0.34260777580519614,0.015499939354809991,0.0,0.0,,0.0,0.0,3

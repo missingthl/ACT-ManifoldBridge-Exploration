@@ -1,0 +1,9 @@
+[articularywordrecognition s1] fitting no_aug baseline
+[articularywordrecognition s1] method=no_aug
+[articularywordrecognition s1] method=csta_topk_uniform_top5
+[articularywordrecognition s2] fitting no_aug baseline
+[articularywordrecognition s2] method=no_aug
+[articularywordrecognition s2] method=csta_topk_uniform_top5
+[articularywordrecognition s3] fitting no_aug baseline
+[articularywordrecognition s3] method=no_aug
+[articularywordrecognition s3] method=csta_topk_uniform_top5

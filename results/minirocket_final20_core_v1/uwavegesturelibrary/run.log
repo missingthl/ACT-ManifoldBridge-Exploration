@@ -1,0 +1,9 @@
+[uwavegesturelibrary s1] fitting no_aug baseline
+[uwavegesturelibrary s1] method=no_aug
+[uwavegesturelibrary s1] method=csta_topk_uniform_top5
+[uwavegesturelibrary s2] fitting no_aug baseline
+[uwavegesturelibrary s2] method=no_aug
+[uwavegesturelibrary s2] method=csta_topk_uniform_top5
+[uwavegesturelibrary s3] fitting no_aug baseline
+[uwavegesturelibrary s3] method=no_aug
+[uwavegesturelibrary s3] method=csta_topk_uniform_top5

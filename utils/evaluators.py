@@ -168,6 +168,27 @@ def build_model(n_kernels: int = 10000, random_state: int = 42, n_jobs: int = 1)
         n_jobs=n_jobs
     )
 
+def _ensure_minirocket_compatible(X: np.ndarray) -> np.ndarray:
+    """Ensure X has fixed length and T >= 9."""
+    if isinstance(X, list):
+        # Handle variable length list of arrays
+        max_t = max(max([x.shape[-1] for x in X]), 9)
+        n_samples = len(X)
+        n_channels = X[0].shape[0]
+        X_padded = np.zeros((n_samples, n_channels, max_t), dtype=np.float32)
+        for i, x in enumerate(X):
+            X_padded[i, :, :x.shape[-1]] = x
+        return X_padded
+    
+    # Check if 3D array has enough timepoints
+    if X.ndim == 3:
+        n_samples, n_channels, n_timepoints = X.shape
+        if n_timepoints < 9:
+            X_padded = np.zeros((n_samples, n_channels, 9), dtype=X.dtype)
+            X_padded[:, :, :n_timepoints] = X
+            return X_padded
+    return X
+
 def fit_eval_minirocket(
     model,
     X_train: np.ndarray,
@@ -175,6 +196,20 @@ def fit_eval_minirocket(
     X_test: np.ndarray,
     y_test: np.ndarray,
 ) -> Dict[str, float]:
+    # Robust Padding
+    X_train = _ensure_minirocket_compatible(X_train)
+    X_test = _ensure_minirocket_compatible(X_test)
+    
+    # Ensure train and test have same length
+    if X_train.shape[-1] != X_test.shape[-1]:
+        max_t = max(X_train.shape[-1], X_test.shape[-1])
+        def pad_to(X, target_t):
+            res = np.zeros((X.shape[0], X.shape[1], target_t), dtype=X.dtype)
+            res[:, :, :X.shape[-1]] = X
+            return res
+        X_train = pad_to(X_train, max_t)
+        X_test = pad_to(X_test, max_t)
+
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
     return {

@@ -1,0 +1,9 @@
+[fingermovements s1] fitting no_aug baseline
+[fingermovements s1] method=no_aug
+[fingermovements s1] method=csta_topk_uniform_top5
+[fingermovements s2] fitting no_aug baseline
+[fingermovements s2] method=no_aug
+[fingermovements s2] method=csta_topk_uniform_top5
+[fingermovements s3] fitting no_aug baseline
+[fingermovements s3] method=no_aug
+[fingermovements s3] method=csta_topk_uniform_top5

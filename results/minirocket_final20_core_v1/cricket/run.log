@@ -1,0 +1,9 @@
+[cricket s1] fitting no_aug baseline
+[cricket s1] method=no_aug
+[cricket s1] method=csta_topk_uniform_top5
+[cricket s2] fitting no_aug baseline
+[cricket s2] method=no_aug
+[cricket s2] method=csta_topk_uniform_top5
+[cricket s3] fitting no_aug baseline
+[cricket s3] method=no_aug
+[cricket s3] method=csta_topk_uniform_top5

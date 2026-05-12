@@ -1,2 +1,3 @@
 dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
-articularywordrecognition,no_aug,0.9899826086956521,,0.0,,,0.0,0.0,1
+articularywordrecognition,csta_topk_uniform_top5,0.9876394446133577,0.0020293151898726895,-7.401486830834377e-17,0.0033391304347825113,0.0,2200.0,10.0,3
+articularywordrecognition,no_aug,0.9876394446133577,0.003922354912691372,0.0,0.0,,0.0,0.0,3

@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+motorimagery,pca_cov_state,0.37642710688532793,0.06447467453355675,0.0338193310801318,0.04902841221250029,,2220.0,10.0,3
+motorimagery,random_cov_state,0.3635283635283635,0.02625295220416761,0.020920587723167405,0.02389739310617609,,2220.0,10.0,3

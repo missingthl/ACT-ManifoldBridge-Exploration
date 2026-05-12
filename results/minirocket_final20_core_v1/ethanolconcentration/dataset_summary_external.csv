@@ -1,2 +1,3 @@
 dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
-ethanolconcentration,no_aug,0.47206654744054055,,0.0,,,0.0,0.0,1
+ethanolconcentration,no_aug,0.4483458532874578,0.025914184933409086,0.0,0.0,,0.0,0.0,3
+ethanolconcentration,csta_topk_uniform_top5,0.4442614842731678,0.0287742070302904,-0.00408436901428999,0.029282248015918055,0.0,2080.0,10.0,3

@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+japanesevowels,pca_cov_state,0.9747641123012633,0.011109353186610557,0.005397363808759363,0.006112373656583357,1.0,2160.0,10.0,3
+japanesevowels,random_cov_state,0.971277454683345,0.014701046890115248,0.001910706190841253,0.009606089297289924,1.0,2160.0,10.0,3

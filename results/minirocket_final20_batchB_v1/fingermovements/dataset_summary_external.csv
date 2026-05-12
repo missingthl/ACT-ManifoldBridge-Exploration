@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+fingermovements,pca_cov_state,0.581747838245363,0.013169260714264264,0.016423198840675446,0.0416607503095615,,2520.0,10.0,3
+fingermovements,random_cov_state,0.5751294144528055,0.014825318060213259,0.009804775048117905,0.02625436011222418,,2520.0,10.0,3

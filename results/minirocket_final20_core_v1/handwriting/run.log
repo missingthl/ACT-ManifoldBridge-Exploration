@@ -1,0 +1,9 @@
+[handwriting s1] fitting no_aug baseline
+[handwriting s1] method=no_aug
+[handwriting s1] method=csta_topk_uniform_top5
+[handwriting s2] fitting no_aug baseline
+[handwriting s2] method=no_aug
+[handwriting s2] method=csta_topk_uniform_top5
+[handwriting s3] fitting no_aug baseline
+[handwriting s3] method=no_aug
+[handwriting s3] method=csta_topk_uniform_top5

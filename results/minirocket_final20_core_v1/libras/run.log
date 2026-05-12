@@ -1,0 +1,9 @@
+[libras s1] fitting no_aug baseline
+[libras s1] method=no_aug
+[libras s1] method=csta_topk_uniform_top5
+[libras s2] fitting no_aug baseline
+[libras s2] method=no_aug
+[libras s2] method=csta_topk_uniform_top5
+[libras s3] fitting no_aug baseline
+[libras s3] method=no_aug
+[libras s3] method=csta_topk_uniform_top5

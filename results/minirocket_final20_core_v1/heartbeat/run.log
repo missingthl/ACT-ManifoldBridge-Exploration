@@ -1,0 +1,9 @@
+[heartbeat s1] fitting no_aug baseline
+[heartbeat s1] method=no_aug
+[heartbeat s1] method=csta_topk_uniform_top5
+[heartbeat s2] fitting no_aug baseline
+[heartbeat s2] method=no_aug
+[heartbeat s2] method=csta_topk_uniform_top5
+[heartbeat s3] fitting no_aug baseline
+[heartbeat s3] method=no_aug
+[heartbeat s3] method=csta_topk_uniform_top5

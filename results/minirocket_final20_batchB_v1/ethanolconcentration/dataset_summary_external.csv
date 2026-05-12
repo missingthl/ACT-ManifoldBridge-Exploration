@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+ethanolconcentration,pca_cov_state,0.4496381726444807,0.013357438987984277,0.001292319357022842,0.03906562009877824,,2080.0,10.0,3
+ethanolconcentration,random_cov_state,0.43981782163333794,0.019614625197588255,-0.00852803165411988,0.04552157822848789,,2080.0,10.0,3

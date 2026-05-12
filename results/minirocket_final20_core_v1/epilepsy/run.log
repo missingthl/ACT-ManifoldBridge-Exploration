@@ -1,0 +1,9 @@
+[epilepsy s1] fitting no_aug baseline
+[epilepsy s1] method=no_aug
+[epilepsy s1] method=csta_topk_uniform_top5
+[epilepsy s2] fitting no_aug baseline
+[epilepsy s2] method=no_aug
+[epilepsy s2] method=csta_topk_uniform_top5
+[epilepsy s3] fitting no_aug baseline
+[epilepsy s3] method=no_aug
+[epilepsy s3] method=csta_topk_uniform_top5

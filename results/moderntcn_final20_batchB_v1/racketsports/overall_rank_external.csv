@@ -1,0 +1,3 @@
+method,n_datasets,mean_f1,mean_rank,win_count
+pca_cov_state,1,0.7820522218501429,1.0,1
+random_cov_state,1,0.7800776927096672,2.0,0

@@ -1,0 +1,9 @@
+[atrialfibrillation s1] fitting no_aug baseline
+[atrialfibrillation s1] method=no_aug
+[atrialfibrillation s1] method=csta_topk_uniform_top5
+[atrialfibrillation s2] fitting no_aug baseline
+[atrialfibrillation s2] method=no_aug
+[atrialfibrillation s2] method=csta_topk_uniform_top5
+[atrialfibrillation s3] fitting no_aug baseline
+[atrialfibrillation s3] method=no_aug
+[atrialfibrillation s3] method=csta_topk_uniform_top5

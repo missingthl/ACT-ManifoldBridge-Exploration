@@ -1,0 +1,9 @@
+[basicmotions s1] fitting no_aug baseline
+[basicmotions s1] method=no_aug
+[basicmotions s1] method=csta_topk_uniform_top5
+[basicmotions s2] fitting no_aug baseline
+[basicmotions s2] method=no_aug
+[basicmotions s2] method=csta_topk_uniform_top5
+[basicmotions s3] fitting no_aug baseline
+[basicmotions s3] method=no_aug
+[basicmotions s3] method=csta_topk_uniform_top5

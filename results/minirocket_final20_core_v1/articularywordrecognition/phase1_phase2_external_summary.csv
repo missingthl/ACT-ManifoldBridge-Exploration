@@ -1,5 +1,6 @@
 phase,dataset,method,aug_f1_mean,aug_f1_std,gain_mean,actual_aug_ratio_mean,method_elapsed_sec_mean,fallback_count_mean,n_seeds
-phase2_new,articularywordrecognition,no_aug,0.989982608695652,,0.0,0.0,0.0,0.0,1
+phase2_new,articularywordrecognition,csta_topk_uniform_top5,0.9876394446133577,0.0020293151898726895,-6.678685382510707e-17,10.0,44.642024213603385,0.0,3
+phase2_new,articularywordrecognition,no_aug,0.9876394446133577,0.003922354912691275,0.0,0.0,0.0,0.0,3
 phase1_locked,atrialfibrillation,dba_sameclass,0.2589506172839506,0.0682950141814794,0.024407382740716032,10.0,,,3
 phase1_locked,atrialfibrillation,raw_aug_jitter,0.23888888888888885,0.08940820521906159,0.004345654345654371,10.0,,,3
 phase1_locked,atrialfibrillation,no_aug,0.23454323454323447,0.078502724418324,0.0,0.0,,,3

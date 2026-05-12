@@ -10,7 +10,7 @@ phase1_locked,atrialfibrillation,raw_mixup,0.1461063627730294,0.0179940713420758
 phase1_locked,atrialfibrillation,raw_aug_scaling,0.13190883190883188,0.059647669677997006,-0.10263440263440264,10.0,,,3
 phase1_locked,atrialfibrillation,csta_group_template_top,0.1291033585151232,0.02503831978501921,-0.10543987602811122,10.0,,,3
 phase1_locked,atrialfibrillation,pca_cov_state,0.11259666259666257,0.061079246178242896,-0.12194657194657192,10.0,,,3
-phase2_new,basicmotions,csta_topk_uniform_top5,1.0,0.0,0.0,10.0,22.258825604687445,0.0,2
+phase2_new,basicmotions,csta_topk_uniform_top5,1.0,0.0,0.0,10.0,27.211074108102668,0.0,3
 phase2_new,basicmotions,no_aug,1.0,0.0,0.0,0.0,0.0,0.0,3
 phase1_locked,ering,pca_cov_state,0.8501776214953166,0.02146308879579797,0.10325621365072013,10.0,,,3
 phase1_locked,ering,csta_top1_current,0.837231988455564,0.05806227356985866,0.09031058061096736,10.0,,,3

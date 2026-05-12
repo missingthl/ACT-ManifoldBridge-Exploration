@@ -1,0 +1,9 @@
+[natops s1] fitting no_aug baseline
+[natops s1] method=no_aug
+[natops s1] method=csta_topk_uniform_top5
+[natops s2] fitting no_aug baseline
+[natops s2] method=no_aug
+[natops s2] method=csta_topk_uniform_top5
+[natops s3] fitting no_aug baseline
+[natops s3] method=no_aug
+[natops s3] method=csta_topk_uniform_top5

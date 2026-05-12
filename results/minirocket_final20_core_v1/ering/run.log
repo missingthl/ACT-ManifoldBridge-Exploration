@@ -1,0 +1,9 @@
+[ering s1] fitting no_aug baseline
+[ering s1] method=no_aug
+[ering s1] method=csta_topk_uniform_top5
+[ering s2] fitting no_aug baseline
+[ering s2] method=no_aug
+[ering s2] method=csta_topk_uniform_top5
+[ering s3] fitting no_aug baseline
+[ering s3] method=no_aug
+[ering s3] method=csta_topk_uniform_top5

@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+cricket,pca_cov_state,0.9953379953379954,0.00807482893971498,0.3919017864851199,0.14001218427480472,1.0,860.0,10.0,3
+cricket,random_cov_state,0.9953379953379954,0.00807482893971498,0.3919017864851199,0.14001218427480472,1.0,860.0,10.0,3

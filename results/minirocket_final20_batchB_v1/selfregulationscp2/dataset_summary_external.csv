@@ -1,0 +1,3 @@
+dataset,method,aug_f1_mean,aug_f1_std,gain_mean,gain_std,best_val_f1_mean,aug_count_mean,actual_aug_ratio_mean,n_seeds
+selfregulationscp2,pca_cov_state,0.5102872368510414,0.019174241510311125,0.02266982093920091,0.024394211667079228,,1600.0,10.0,3
+selfregulationscp2,random_cov_state,0.5038811458054145,0.024778346430682354,0.016263729893574035,0.014436698368895749,,1600.0,10.0,3
